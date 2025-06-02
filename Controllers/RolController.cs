@@ -17,13 +17,21 @@ namespace WebApi29.Controllers
         {
             _rolServices = rolServices;
         }
-
+        //Get Rol
         [HttpGet]
-        public async Task<IActionResult> GetRoles()
+        public async Task<IActionResult> GetRoles() //IApermite gestionar diversas respuestas HTTP
         {
             var reponse = await _rolServices.GeAll();
 
             return Ok(reponse);
+        }
+
+        //Rol obtener por id
+        [HttpGet("id")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var response = await _rolServices.GetById(id);
+            return Ok(response);
         }
 
         //create
