@@ -13,5 +13,8 @@ namespace WebApi29.Services.IServices
         public Task<Response<Usuario>> Update(int id, UsuarioRequest request);
 
         public Task<Response<string>> Delete(int id);
+
+        public Usuario? ValidarUsuario(string userName, string password);//Validar usuario(?)
+
     }
 }

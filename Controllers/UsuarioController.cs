@@ -1,11 +1,15 @@
 ﻿using Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi29.Services.IServices;
-
+//4. proteger a UsuarioController y RolController
 namespace WebApi29.Controllers
 {
+    [Authorize] //esto hace que evite que se acceda al endpoint sin un token válido se lo pude a todas
     [ApiController]
     [Route("[controller]")] //route el controllador jijiij
+    
+
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioServices _usuarioServices;
@@ -14,7 +18,7 @@ namespace WebApi29.Controllers
         {
             _usuarioServices = usuarioServices;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -23,6 +27,7 @@ namespace WebApi29.Controllers
             return Ok(reponse);
         }
         //obtener por id
+        [Authorize]
         [HttpGet("id")]
         public async Task<IActionResult>GetById(int id)
         {
@@ -30,6 +35,7 @@ namespace WebApi29.Controllers
             return Ok(response);
         }
         //create
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create (UsuarioRequest  request)
         {
@@ -38,6 +44,7 @@ namespace WebApi29.Controllers
         }
 
         //edit
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UsuarioRequest request)
         {
@@ -46,6 +53,7 @@ namespace WebApi29.Controllers
         }
 
         //delete
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
